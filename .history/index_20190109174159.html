@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>北京移动</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="text/javascript">
+window.onresize = resize;
+function resize(){
+    var desW = 640,
+        winW = document.documentElement.clientWidth || document.body.clientWidth,
+        ratio = winW / desW;
+    document.documentElement.style.fontSize = ratio * 100 + "px"; 
+}
+resize();
+</script>
+</head>
+<body>
+<div class="wrap">
+    <div class="page page-loading">
+        <div class="loading">
+            <div class="loading-animate"></div>
+            <p class='progress'>0%</p>
+        </div>
+    </div>
+    <!-- 首页 -->
+    <div class="page page-index lamp-b">
+        <div class="title">
+            <img src="images/title.png" class="full">
+        </div>
+        <a href="javascript:;" class="btn-rule"></a>
+        <div class="zhou-con"></div>
+        <div class="btn-con">
+            <a href="javascript:;" class="btn-make"></a>
+        </div>
+        <div class="temp-con" style="position: absolute;left:0;top:5rem;z-index: 50;">
+            <p><a href="javascript:;" onclick="fn6()">未关注</a></p>
+            <p><a href="javascript:;" onclick="fn7()">未绑定</a></p>
+            <script type="text/javascript">
+                function fn6(){
+                    userInfo.isAtten = false;
+                }
+                function fn7(){
+                    userInfo.isAtten = true;
+                    userInfo.isBind = false;
+                }
+            </script>
+        </div>
+    </div>
+    <!-- 游戏页 -->
+    <div class="page page-game lamp-s">
+        <div class="temp-con" style="position: absolute;left:0;top:1.5rem;z-index: 50;">
+            <p><a href="javascript:;" onclick="fn1()">有好友记录</a></p>
+            <p><a href="javascript:;" onclick="fn2()">满1000点</a></p>
+            <p><a href="javascript:;" onclick="fn3()">满3000点</a></p>
+            <p><a href="javascript:;" onclick="fn4()">异网</a></p>
+            <p><a href="javascript:;" onclick="fn5()">集齐8种食材</a></p>
+            <script type="text/javascript">
+                function fn1(){
+                    friHelpList.push(tempFriHelpList);
+                    renderRecordList();
+                }
+                function fn2(){
+                    scInfoList[0]['addTimes'] = 2;
+                    renderScList();
+                    updateScVal();
+                    renderProgress();
+                }
+                function fn3(){
+                    scInfoList[0]['addTimes'] = 12;
+                    renderScList();
+                    updateScVal();
+                    renderProgress();
+                }
+                function fn4(){
+                    userInfo.isYw = true;
+                }
+                function fn5(){
+                    for(var i=0;i<scInfoList.length;i++){
+                        scInfoList[i]['addTimes'] = 1;
+                    }
+                    renderScList();
+                    updateScVal();
+                    renderProgress();
+                }
+            </script>
+        </div>
+        <a href="javascript:;" class="btn-rule"></a>
+        <div class="user-con">
+            <div class="icon-user">
+                <img src="">
+            </div>
+            <div class="txt-con">
+                <p class="user-name"></p>
+                <p class="times-con">增加美味值机会：<span class="times"></span>次</p>
+            </div>
+        </div>
+        <p class="sc-val-con">当前美味值：<span class="val"></span></p>
+        <div class="game-con">
+            <div class="sc-con">
+                <span class="sc-yr on">
+                    <i>+1</i>
+                </span>
+                <span class="sc-hd"></span>
+                <span class="sc-gy"></span>
+                <span class="sc-hm"></span>
+                <span class="sc-hz"></span>
+                <span class="sc-lz"></span>
+                <span class="sc-ld"></span>
+                <span class="sc-hs"></span>
+            </div>
+            <a href="javascript:;" class="btn-add"></a>
+        </div>
+        <div class="score-con">
+            <div class="gift-con">
+                <span class="gift zhou"></span>
+                <span class="gift bag1"><i></i></span>
+                <span class="gift bag2"><i></i></span>
+            </div>
+            <div class="progress-con">
+                <div class="inner"></div>
+                <span class="score score-600"></span>
+                <span class="score score-1000"></span>
+                <span class="score score-3000"></span>
+            </div>
+        </div>
+        <div class="bean-con">
+            <img src="images/bean.png" class="full">
+        </div>
+        <div class="record-con">
+            <div class="bar"></div>
+            <div class="inner">
+                <dl>
+                    <dt>
+                        <span class="name">昵称</span>
+                        <span class="sc">食材</span>
+                        <span class="val">美味值</span>
+                        <span class="time">时间</span>
+                        <!-- <span></span> -->
+                    </dt>
+                </dl>
+                <dl class="list">
+                    <dd>
+                        <span>李建国</span>
+                        <span>红豆</span>
+                        <span>50</span>
+                        <span>12.12 20:30</span>
+                        <!-- <span>
+                            <a href="javascript:;" class="btn-look">查看</a>
+                        </span> -->
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <!-- 关注页 -->
+    <div class="page page-atten lamp-b bg-bottom">
+        <div class="main">
+            <p>亲爱的用户</p>
+            <p>腊八粥送吉祥</p>
+            <p>联通、电信的小伙伴们统统可以参加啦！</p><br>
+            <p>扫码关注微信参加活动</p>
+            <div class="code-con">
+                <img src="images/code.jpg" class="full">
+            </div>
+            <p>长按图片—识别图中二维码—关注公众号</p>
+        </div>
+    </div>
+    <!-- 绑定手机号 -->
+    <div class="page page-bind lamp-b bg-bottom">
+        <div class="tips">
+            <h1 class="title">绑定手机号</h1>
+            <p>尊敬的用户，您还没有绑定手机号码哦！</p>
+            <p>快来在下方完成您的绑定吧~</p>
+        </div>
+        <div class="form">
+            <p>
+                <label>手机号码</label>
+                <input type="text" name="" class="ipt-tel">
+            </p>
+            <p>
+                <label>验证码</label>
+                <input type="text" name="" class="ipt-code">
+                <a href="javascript:;" class="get-code">获取验证码</a>
+            </p>
+        </div>
+        <div class="btn-con">
+            <a href="javascript:;" class="btn btn-submit"></a>
+        </div>
+    </div>
+    <!-- 活动规则 -->
+    <div class="dlg dlg-rule">
+        <div class="con">
+            <div class="outer">
+                <div class="inner">
+                    <div class="main">
+                        <dl>
+                            <h2 class="tit">一 活动时间：</h2>
+                            <p>1月11日至1月15日</p>
+                            <h2 class="tit">二 活动介绍：</h2>
+                            <p>活动期间，用户可通过北京移动微信公众号，参与“腊八粥送吉祥”活动。用户获得熬制腊八粥机会，用户初始获得600点美味值及3次抽取食材的机会。抽取食材可为自己的腊八粥增加美味值。同时可邀请好友为自己添加食材，为自己的腊八粥增加美味值。当集齐8种食材时，额外获得1000点美味值。美味值达到1000点可解锁一次抽奖机会；美味度超过3000点可解锁一次抽奖机会；共计两次。</p>
+                            <p>北京移动用户抽中流量奖品后，自动充入关注绑定账户。</p>
+                            <p>非北京移动用户抽中流量奖品后可以转赠给北京移动手机号码。</p>
+                            <table class="table">
+                                <tr>
+                                    <td>腊八食材对应的美味值</td>
+                                </tr>
+                                <tr>
+                                    <td>红豆美味值</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td>黑米美味值</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td>桂圆美味值</td>
+                                    <td>100</td>
+                                </tr>
+                                <tr>
+                                    <td>花生美味值</td>
+                                    <td>100</td>
+                                </tr>
+                                <tr>
+                                    <td>红枣美味值</td>
+                                    <td>150</td>
+                                </tr>
+                                <tr>
+                                    <td>莲子美味值</td>
+                                    <td>150</td>
+                                </tr>
+                                <tr>
+                                    <td>绿豆美味值</td>
+                                    <td>200</td>
+                                </tr>
+                                <tr>
+                                    <td>薏仁美味值</td>
+                                    <td>400</td>
+                                </tr>
+                            </table>
+                            <h2 class="tit">三 奖品规则：</h2>
+                            <p>活动奖品包含：200MB、500MB、1GB、5GB、8.8GB全国流量及部分免费业务体验资格、优惠业务办理资格。</p>
+                            <h3 class="subtit">（一）流量奖品</h3>
+                            <div class="detail-con">
+                                <p>1.流量档位包括200MB、500MB、1GB、5GB、8.8GB全国流量；</p>
+                                <p>2.奖品将于领取后15日内，自动充入用户的微信关注绑定手机号，流量自充入日起生效，有效期至本月月末；</p>
+                                <p>3.活动赠送套外国内流量，优先级低于主套餐、可选包、短促包、定向流量包等，赠送流量无法共享，不可结转；</p>
+                                <p>4.处于保留期、保号期、挂失、申停、欠停、转品牌过渡期的手机号；物联网卡、4G超级日租卡套餐、神州行开心听、语音套餐卡、神州行B标准资费基本策划等特殊资费用户无法领取赠送流量；</p>
+                                <p>5.赠送流量每月仅可领取100次，超出上限不可领取。</p>
+                            </div>
+                            <h3 class="subtit">（二）其它奖品</h3>
+                            <p>规则详见各奖品办理页面</p>
+                            <p class="tips">温馨提示：活动将于1月15日结束，请您务必于活动结束前完成领奖，逾期视为自动放弃奖品。</p>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-con">
+                <a href="javascript:;" class="btn btn-ok"></a>
+            </div>
+        </div>
+    </div>
+    <!-- 分享 -->
+    <div class="dlg dlg-share">
+        <div class="share-con">
+            <img src="images/share.png" class="full">
+        </div>
+    </div>
+    <!-- 通用弹窗 -->
+    <div class="dlg dlg-common">
+        <div class="con">
+            <!-- <div class="inner-confirm">
+                <p>您是否将</p>
+                <p><span class="key">8.8GB</span>全国流量</p><br>
+                <p>转赠到手机号</p>
+                <p>'+tel+'</p>
+                <p>账号中</p>
+                <p class="tips">点击确认后，信息将不可更改</p>
+                <div class="btn-con">
+                    <a href="javascript:;" class="btn btn-modify"></a>
+                    <a href="javascript:;" class="btn btn-confirm"></a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/fastclick.min.js"></script>
+<script type="text/javascript" src="js/preload.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript">
+var _pageIndex = $(".page-index"),
+    _pageAtten = $(".page-atten"),
+    _pageBind = $(".page-bind"),
+    _pageGame = $(".page-game"),
+    _dlgCommonCon = $(".dlg-common .con"),
+    _dlgCommon = $(".dlg-common"),
+    _dlgShare = $(".dlg-share"),
+    _dlgRule = $(".dlg-rule"),
+    _times = $(".page-game .times"),
+    _scVal = $(".page-game .sc-val-con .val"),
+    _userCon = $(".page-game .user-con"),
+    _scCon = $(".page-game .sc-con"),
+    _giftCon = $(".page-game .gift-con"),
+    _progressBar = $(".page-game .progress-con .inner"),
+    _recordList = $(".page-game .record-con .list"),
+    _btnAdd = $(".page-game .btn-add");
+
+var deadtime = 60;  //获取验证码的倒计时时间
+var st = {
+    val:deadtime,
+    timer:null,
+    flag:false
+};
+
+function isMobile(num){
+    return /^1\d{10}$/.test(num);
+}
+
+// 更新美味值机会
+function updateScTimes(){
+    _times.html(gameInfo.times);
+}
+// 更新美味值分值
+function updateScVal(){
+    _scVal.html(gameInfo.score);
+}
+// 渲染进度条
+function renderProgress(){
+    _giftCon.find(".gift").removeClass("on");
+    if(gameInfo.score >= 3000){
+        _giftCon.find(".bag2").addClass("on");
+        _giftCon.find(".bag1").addClass("on");
+    } else if(gameInfo.score >=1000) {
+        _giftCon.find(".bag1").addClass("on");
+    }
+
+    var percent = gameInfo.score / 3000 * 100;
+    if(percent > 99){
+        percent = 100;
+    }
+    console.log("percent---------",percent);
+    _progressBar.animate({
+        width:percent+'%'
+    },1000);
+}
+// 渲染食材列表
+function renderScList(){
+    var html = '';
+    var score = 0;
+    var kind = 0;
+    var len = scInfoList.length;
+    for(var i=0;i<len;i++){
+        if(scInfoList[i]['addTimes'] > 0){
+            html += '<span class="sc-'+scInfoList[i]['cls']+' on">'+
+                        '<i>+'+scInfoList[i]['addTimes']+'</i>'+
+                    '</span>';
+            score += scInfoList[i]['score'] * scInfoList[i]['addTimes'];
+            kind++;
+        } else {
+            html += '<span class="sc-'+scInfoList[i]['cls']+'"></span>';
+        }
+    }
+    gameInfo.score = score + gameInfo.initScore;
+    gameInfo.kind = kind;
+    _scCon.html(html);
+    if(kind == len && !gameInfo.hasGetAllKind){
+        gameInfo.score += 1000;
+        gameInfo.hasGetAllKind = true;
+        renderDlgCommon(_dlgCommonTips.scJq());
+    }
+    console.log("gameInfo.score------",gameInfo.score);
+}
+function renderRecordList(){
+    var html = '';
+    var item;
+    var len = friHelpList.length;
+    if(len){
+        for(var i=0;i<len;i++){
+            item = friHelpList[i];
+            html += '<dd>'+
+                        '<span>'+item['userName']+'</span>'+
+                        '<span>'+item['scName']+'</span>'+
+                        '<span>'+item['score']+'</span>'+
+                        '<span>'+item['time']+'</span>'+
+                    '</dd>';
+                        // '<span>'+
+                        //     '<a href="javascript:;" class="btn-look" data-user-name="'+item['userName']+'" data-type="'+item['cls']+'">查看</a>'+
+                        // '</span>'
+                    
+        }
+    } else {
+        html += '<div class="none"><p>您还没有好友助力记录哦~<p></div>';
+    }
+    _recordList.html(html);
+}
+// 设置用户信息
+function setUserInfo(){
+    _userCon.find(".icon-user img").attr("src",userInfo.headImg);
+    _userCon.find(".user-name").html(userInfo.name);
+}
+function updatePageGame(){
+    setUserInfo();
+    renderScList();
+    renderProgress();
+    updateScTimes();
+    updateScVal();
+}
+function lotto(index){
+    index -= 1;
+    _dlgCommon.attr("data-index",index);
+    
+    if(prizeList[index]['val'] != undefined){  //已抽奖
+        if(userInfo.isYw){
+            if(prizeList[index]['hasGiven']){
+                renderDlgCommon(_dlgCommonTips.sendFlowSuccess(prizeList[index]));
+            } else {
+                renderDlgCommon(_dlgCommonTips.given(prizeList[index]));
+            }
+        } else {
+            renderDlgCommon(_dlgCommonTips.flow(prizeList[index]));
+        }
+    } else {
+        var name = prizeInfoList[index]['name'];
+        var prizes = prizeInfoList[index]['val'];
+        var len = prizes.length;
+        var random = Math.floor(Math.random() * len);
+        var val = prizes[random];
+        tempPrize.name = name;
+        tempPrize.val = val;
+        if(userInfo.isYw){
+            renderDlgCommon(_dlgCommonTips.given(tempPrize));
+        } else {
+            renderDlgCommon(_dlgCommonTips.flow(tempPrize));
+            updatePrizeList(index);
+        }
+    }
+}
+// 首页
+function page(){
+    _pageIndex.on("click",".btn-make",function(){
+        if(!userInfo.isAtten){
+            _pageAtten.show();
+        } else if(!userInfo.isBind){
+            _pageBind.show();
+        } else {
+            renderDlgCommon(_dlgCommonTips.getSc('zhou'));
+        }
+    });
+    _pageBind.on("click",".btn-submit",function(){  //提交
+        var myTel = $.trim(_pageBind.find(".ipt-tel").val());
+        var code = $.trim(_pageBind.find(".ipt-code").val());
+        if(isMobile(myTel)){
+            if(code){   //匹配验证码
+                alert('提交成功');
+            }
+        }
+    }).on("click",".get-code",function(){   //获取验证码
+        if(!st.flag){
+            st.flag = true;
+            var _this = $(this);
+            _this.text(st.val+'s');
+            st.timer = setInterval(function(){
+                st.val--;
+                if(st.val > 0){
+                    _this.text(st.val+'s');
+                } else {
+                    clearInterval(st.timer);
+                    st.val = deadtime;
+                    st.timer = null;
+                    st.flag = false;
+                    _this.text('获取验证码');
+                }
+            },1000);
+        }
+    });
+    _pageGame.on("click",".btn-add",function(){
+        if(gameInfo.times > 0){
+            var type = randomScType().type;
+            gameInfo.times--;
+            renderDlgCommon(_dlgCommonTips.getSc(type));
+            renderScList();
+            updateScTimes();
+            updateScVal();
+        } else {
+            renderDlgCommon(_dlgCommonTips.noChance());
+        }
+    }).on("click",".gift",function(){
+        var index = $(this).index();
+        console.log(gameInfo.score);
+        if(index == 1){
+            if(gameInfo.score < gameInfo.gift1Score){
+                renderDlgCommon(_dlgCommonTips.noEnough(gameInfo.gift1Score))
+            } else {
+                lotto(index);
+            }
+        }
+        if(index == 2){
+            if(gameInfo.score < gameInfo.gift2Score){
+                renderDlgCommon(_dlgCommonTips.noEnough(gameInfo.gift2Score))
+            } else {
+                lotto(index);
+            }
+        }
+    }).on("click",".btn-look",function(){
+        var userName = $(this).attr("data-user-name"),
+            type = $(this).attr("data-type");
+
+        renderDlgCommon(_dlgCommonTips.addHelpSuccess(type,userName));
+    });
+}
+// 更新抽奖列表
+function updatePrizeList(index,flag){
+    if(flag && tempPrize['val'] == ''){   //flag:true取消转赠
+        console.log(prizeList);
+        return;
+    }
+    prizeList[index]['val'] = tempPrize['val'];
+    prizeList[index]['hasGiven'] = tempPrize['hasGiven'];
+    prizeList[index]['friTel'] = tempPrize['friTel'];
+    console.log(prizeList); //ajax提交prizeList
+    // 初始化临时变量
+    tempPrize = {
+        val:'',
+        hasGiven:false,
+        friTel:0
+    };
+}
+// dlg
+function dlg(){
+    _dlgCommon.on("click",".btn-go",function(){
+        _dlgCommon.hide();
+        _pageGame.show();
+        updatePageGame();
+        renderRecordList();
+    }).on("click",".btn-send",function(){   //发送好友
+        _dlgCommon.hide();
+        _dlgShare.show();
+    }).on("click",".btn-ok",function(){ //确定
+        _dlgCommon.hide();
+        renderProgress();
+    }).on("click",".btn-cancel",function(){ //取消
+        var index = parseInt(_dlgCommon.attr("data-index"));
+        updatePrizeList(index,true);
+        _dlgCommon.hide();
+    }).on("click",".btn-given",function(){  //转赠
+        var index = parseInt(_dlgCommon.attr("data-index"));
+        if(prizeList[index]['val']){
+            tempPrize.val = prizeList[index]['val'];
+        }
+        renderDlgCommon(_dlgCommonTips.form());
+    }).on("click",".btn-tel",function(){    //输入手机号-确定
+        var friTel = $.trim(parseInt(_dlgCommon.find(".ipt-tel").val()));
+        if(isMobile(friTel)){
+            tempPrize.friTel = friTel;
+            renderDlgCommon(_dlgCommonTips.confirm(tempPrize));
+        }
+    }).on("click",".btn-modify",function(){ //异网转赠修改手机号
+        renderDlgCommon(_dlgCommonTips.form());
+    }).on("click",".btn-confirm",function(){    //异网转赠确认
+        var index = parseInt(_dlgCommon.attr("data-index"));
+        tempPrize.hasGiven = true;
+        renderDlgCommon(_dlgCommonTips.sendFlowSuccess(tempPrize));
+        updatePrizeList(index);
+    }).on("click",".btn-close",function(){
+        if(userInfo.isYw){
+            var index = parseInt(_dlgCommon.attr("data-index"));
+            updatePrizeList(index,true);
+        }
+        $(this).closest(".dlg").hide();
+    });
+    _dlgShare.on("click",function(){
+        _dlgShare.hide();
+    });
+}
+var tel = 12345678910;
+var friName = 'abc';
+var friTel = 12342321334;
+var userInfo = {    //用户信息
+    isAtten:true,
+    isBind:true,
+    name:'欢乐的豆子',
+    headImg:'images/icon-user.png',
+    isYw:false  //是否是异网
+};
+// 游戏信息
+var gameInfo = {
+    gift1Score:1000,    //礼盒1领奖条件
+    gift2Score:3000,    //礼盒2领奖条件
+    initScore:600,//初始美味值
+    score:0,    //美味值获得分值
+    times:3,    //美味值机会
+    kind:3,     //已集齐的美味值种类
+    hasGetAllKind:false //是否已集齐8种食材，集齐后score+1000
+};
+ //存放临时中奖项
+var tempPrize = {
+    val:'',
+    hasGiven:false,     //异网是否已赠送
+    friTel:0,        //异网赠送的朋友手机号
+};
+var prizeList = [{
+    name:'1000'
+},{
+    name:'3000'
+}]; //中奖列表
+$(function(){
+    FastClick.attach(document.body);
+    
+    page();
+    dlg();
+    // renderDlgCommon(_dlgCommonTips.addHelpSuccess('hd',friName));
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+scInfoList
+在app.js的randomScType()中，要提交给后台
+
+
+// 好友助力列表
+friHelpList在fri.html中要提交给后台

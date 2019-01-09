@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>北京移动</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="text/javascript">
+window.onresize = resize;
+function resize(){
+    var desW = 640,
+        winW = document.documentElement.clientWidth || document.body.clientWidth,
+        ratio = winW / desW;
+    document.documentElement.style.fontSize = ratio * 100 + "px"; 
+}
+resize();
+</script>
+</head>
+<body>
+<div class="wrap">
+    <!-- 首页 -->
+    <div class="page page-fri lamp-b bg-bottom">
+        <div class="title">
+            <img src="images/title-fri.png" class="full">
+        </div>
+        <a href="javascript:;" class="btn-rule"></a>
+        <div class="tips">
+            <p>亲爱的好朋友腊八节快乐！</p>
+            <p>我是<span class="fri-name"></span></p>
+            <p>我正在参加腊八粥送吉祥活动</p><br>
+            <p>快来帮我点一下，抽取腊八粥食材</p>
+            <p>助我赢取8.8GB流量大奖吧！</p>
+        </div>
+        <div class="btn-con">
+            <a href="javascript:;" class="btn-help"></a>
+        </div>
+    </div>
+    <!-- 活动规则 -->
+    <div class="dlg dlg-rule">
+        <div class="con">
+            <div class="outer">
+                <div class="inner">
+                    <div class="main">
+                        <dl>
+                            <h2 class="tit">一 活动时间：</h2>
+                            <p>1月11日至1月15日</p>
+                            <h2 class="tit">二 活动介绍：</h2>
+                            <p>活动期间，用户可通过北京移动微信公众号，参与“腊八粥送吉祥”活动。用户获得熬制腊八粥机会，用户初始获得600点美味值及3次抽取食材的机会。抽取食材可为自己的腊八粥增加美味值。同时可邀请好友为自己添加食材，为自己的腊八粥增加美味值。当集齐8种食材时，额外获得1000点美味值。美味值达到1000点可解锁一次抽奖机会；美味度超过3000点可解锁一次抽奖机会；共计两次。</p>
+                            <p>北京移动用户抽中流量奖品后，自动充入关注绑定账户。</p>
+                            <p>非北京移动用户抽中流量奖品后可以转赠给北京移动手机号码。</p>
+                            <h2 class="tit">三 奖品规则：</h2>
+                            <p>活动奖品包含：200MB、500MB、1GB、5GB、8.8GB全国流量及部分免费业务体验资格、优惠业务办理资格。</p>
+                            <h3 class="subtit">（一）流量奖品</h3>
+                            <div class="detail-con">
+                                <p>1.流量档位包括200MB、500MB、1GB、5GB、8.8GB全国流量；</p>
+                                <p>2.奖品将于领取后15日内，自动充入用户的微信关注绑定手机号，流量自充入日起生效，有效期至本月月末；</p>
+                                <p>3.活动赠送套外国内流量，优先级低于主套餐、可选包、短促包、定向流量包等，赠送流量无法共享，不可结转；</p>
+                                <p>4.处于保留期、保号期、挂失、申停、欠停、转品牌过渡期的手机号；物联网卡、4G超级日租卡套餐、神州行开心听、语音套餐卡、神州行B标准资费基本策划等特殊资费用户无法领取赠送流量；</p>
+                                <p>5.赠送流量每月仅可领取100次，超出上限不可领取。</p>
+                            </div>
+                            <h3 class="subtit">（二）其它奖品</h3>
+                            <p>规则详见各奖品办理页面</p>
+                            <p class="tips">温馨提示：活动将于1月15日结束，请您务必于活动结束前完成领奖，逾期视为自动放弃奖品。</p>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-con">
+                <a href="javascript:;" class="btn btn-ok"></a>
+            </div>
+        </div>
+    </div>
+    <!-- 通用弹窗 -->
+    <div class="dlg dlg-common">
+        <div class="con"></div>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/fastclick.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript">
+var _pageFri = $(".page-fri"),
+    _dlgRule = $(".dlg-rule"),
+    _dlgCommonCon = $(".dlg-common .con"),
+    _dlgCommon = $(".dlg-common"),
+    _friName = $(".page-fri .fri-name");
+
+var friName = '快乐的豆子';  //助力好友
+
+$(function(){
+    FastClick.attach(document.body);
+    _friName.html(friName);
+    // 为他助力
+    _pageFri.on("click",".btn-help",function(){
+        var scInfo = randomScType();
+        var item = scInfoList[scInfo['index']];
+        var type = scInfo.type;
+        renderDlgCommon(_dlgCommonTips.lookHelpRecord(type,friName));
+        var obj = {
+            userName:friName,
+            scName:item['name'],
+            score:item['score'],
+            cls:item['cls'],
+            time:getCurrentTime()
+        };
+        friHelpList.push(obj);  
+        // ajax提交friHelpList
+        console.log(friHelpList);
+    });
+    // 去制作腊八粥
+    _dlgCommon.on("click",".btn-join",function(){
+        window.location.href = "./index.html";
+    });
+})
+</script>
+</body>
+</html>
