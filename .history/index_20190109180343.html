@@ -487,8 +487,10 @@ function page(){
             renderScList();
             updateScTimes();
             updateScVal();
+            $('.times-con').show();
         } else {
             renderDlgCommon(_dlgCommonTips.noChance());
+            $('.times-con').hide();
         }
     }).on("click",".gift",function(){
         var index = $(this).index();
@@ -514,13 +516,6 @@ function page(){
         renderDlgCommon(_dlgCommonTips.addHelpSuccess(type,userName));
     });
 }
-window.setInterval(function(){
-    if(gameInfo.times > 0){
-        $('.times-con').show();
-    }else if(gameInfo.times === 0){
-        $('.times-con').hide();
-    }
-},200);
 // 更新抽奖列表
 function updatePrizeList(index,flag){
     if(flag && tempPrize['val'] == ''){   //flag:true取消转赠

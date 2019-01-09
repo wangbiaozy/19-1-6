@@ -520,7 +520,7 @@ window.setInterval(function(){
     }else if(gameInfo.times === 0){
         $('.times-con').hide();
     }
-},200);
+});
 // 更新抽奖列表
 function updatePrizeList(index,flag){
     if(flag && tempPrize['val'] == ''){   //flag:true取消转赠
@@ -545,6 +545,9 @@ function dlg(){
         _pageGame.show();
         updatePageGame();
         renderRecordList();
+        if(gameInfo.times === 0){
+            $('.times-con').hide();
+        }
     }).on("click",".btn-send",function(){   //发送好友
         _dlgCommon.hide();
         _dlgShare.show();

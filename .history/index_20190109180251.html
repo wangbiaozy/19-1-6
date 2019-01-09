@@ -362,8 +362,10 @@ function renderScList(){
                     '</span>';
             score += scInfoList[i]['score'] * scInfoList[i]['addTimes'];
             kind++;
+            $('.times-con').show();
         } else {
             html += '<span class="sc-'+scInfoList[i]['cls']+'"></span>';
+            $('.times-con').hide();
         }
     }
     gameInfo.score = score + gameInfo.initScore;
@@ -514,13 +516,6 @@ function page(){
         renderDlgCommon(_dlgCommonTips.addHelpSuccess(type,userName));
     });
 }
-window.setInterval(function(){
-    if(gameInfo.times > 0){
-        $('.times-con').show();
-    }else if(gameInfo.times === 0){
-        $('.times-con').hide();
-    }
-},200);
 // 更新抽奖列表
 function updatePrizeList(index,flag){
     if(flag && tempPrize['val'] == ''){   //flag:true取消转赠
