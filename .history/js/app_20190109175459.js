@@ -30,11 +30,6 @@ var _dlgCommonTips = {
     // 美味值不足
     noEnough:function(score){
         var html = '';
-        html += '<div class="inner-no-enough"><p>美味值达到'+score+'点</p><p>才能解锁这个礼盒</p><br><p>快去邀请好友</p><p>帮忙积攒更多美味值吧！</p><div class="btn-con"> <a href="javascript:;" class="btn btn-send"></a> </div> </div>'
-        return html;
-    },
-    noEnough_1:function(score){
-        var html = '';
         html += '<div class="inner-no-enough"><p>美味值达到'+score+'点</p><p>才能解锁这个礼盒</p><p>最高可抽<span>8.8GB</span>流量</p><p>快去邀请好友</p><p>帮忙积攒更多美味值吧！</p><div class="btn-con"> <a href="javascript:;" class="btn btn-send"></a> </div> </div>'
         return html;
     },
